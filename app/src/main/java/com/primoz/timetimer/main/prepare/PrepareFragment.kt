@@ -4,18 +4,19 @@ import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.text.InputFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import com.primoz.timetimer.R
 import com.primoz.timetimer.activities.MainActivity
 import com.primoz.timetimer.data_mvp.WorkoutsRepository
 import com.primoz.timetimer.data_mvp.source.WorkoutsDataSourceDB
+import com.primoz.timetimer.extras.FontManager
 import com.primoz.timetimer.main.MainActivity2
 import kotlinx.android.synthetic.main.fragment_prepare.*
-import android.text.InputFilter
-import com.primoz.timetimer.extras.FontManager
 
 
 class PrepareFragment : Fragment(), PrepareContract.View, TotalTimeListener {
@@ -76,6 +77,15 @@ class PrepareFragment : Fragment(), PrepareContract.View, TotalTimeListener {
         (activity as MainActivity2).showPlayFragment(idOfProgram)
     }
 
+    override fun showEnterTitle() {
+        Toast.makeText(context, getString(R.string.error_enter_title), Toast.LENGTH_SHORT).show()
+    }
+
+    override fun closePrepare() {
+        (activity as MainActivity2).loadWorkoutListFragment()
+    }
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -86,6 +96,7 @@ class PrepareFragment : Fragment(), PrepareContract.View, TotalTimeListener {
         etName.typeface = FontManager.getTypeface(context, FontManager.ALEGREYA_TTF)
 
         showWork(5) //Set Default Work to 5s
+        updateTotalTime(0,0,5)
 
         //Load Program if Necessary
         if (arguments != null) {

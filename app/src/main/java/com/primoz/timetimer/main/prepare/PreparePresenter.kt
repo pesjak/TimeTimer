@@ -1,7 +1,8 @@
 package com.primoz.timetimer.main.prepare
 
 import com.primoz.timetimer.data_mvp.WorkoutsRepository
-import com.primoz.timetimer.main.workouts.WorkoutsContract
+import com.primoz.timetimer.data_mvp.source.DataHelper
+import io.realm.Realm
 
 /**
  * Created by Primož on 21/04/2018.
@@ -11,6 +12,7 @@ class PreparePresenter(private var mWorkoutsRepository: WorkoutsRepository, var 
     init {
         mView.setPresenter(this)
     }
+
     override fun start() {
 
     }
@@ -41,10 +43,16 @@ class PreparePresenter(private var mWorkoutsRepository: WorkoutsRepository, var 
     }
 
     override fun loadProgram(idOfProgram: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
+
     override fun saveProgram(title: String, work: Int, rest: Int, rounds: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (title.isEmpty()) {
+            mView.showEnterTitle()
+            return
+        }
+        DataHelper.addOrEditWorkout(Realm.getDefaultInstance(), title, work, rest, rounds)
+        mView.closePrepare()
     }
 
     override fun playProgram(id: Int) {

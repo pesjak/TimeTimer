@@ -1,11 +1,8 @@
 package com.primoz.timetimer.main.prepare
 
-import android.support.v4.app.INotificationSideChannel
+import android.content.Context
 import com.primoz.timetimer.BasePresenter
 import com.primoz.timetimer.BaseView
-import com.primoz.timetimer.data_mvp.Workout
-
-import io.realm.RealmList
 
 /**
  * Created by Primož Pesjak on 22/09/2017.
@@ -21,6 +18,8 @@ interface PrepareContract {
         fun showTotalTime(seconds: String)
         fun showDialogAbort()
         fun showPlayFragment(idOfProgram: Int)
+        fun showEnterTitle()
+        fun closePrepare()
     }
 
     interface Presenter : BasePresenter {

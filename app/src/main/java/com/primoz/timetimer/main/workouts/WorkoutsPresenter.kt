@@ -40,15 +40,15 @@ class WorkoutsPresenter(private var mWorkoutsRepository: WorkoutsRepository, var
         mWorkoutsView.showAddWorkout()
     }
 
-    override fun editWorkout(workoutID: Long) {
+    override fun editWorkout(workoutID: Int) {
         mWorkoutsView.showWorkoutDetailUI(workoutID)
     }
 
-    override fun startWorkout(workoutID: Long) {
+    override fun startWorkout(workoutID: Int) {
         mWorkoutsView.showStartWorkout(workoutID)
     }
 
-    override fun removeWorkout(workoutID: Long) {
+    override fun removeWorkout(workoutID: Int) {
         mWorkoutsRepository.deleteWorkout(workoutID, object : WorkoutsDataSource.DeletedWorkoutCallback {
             override fun onWorkoutDeleted() {
                 mWorkoutsView.showSuccessfullyDeletedMessage()

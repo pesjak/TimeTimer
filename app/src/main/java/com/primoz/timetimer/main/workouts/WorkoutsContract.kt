@@ -19,9 +19,9 @@ interface WorkoutsContract {
 
         fun showAddWorkout()
 
-        fun showWorkoutDetailUI(workoutID: Long)
+        fun showWorkoutDetailUI(workoutID: Int)
 
-        fun showStartWorkout(workoutID: Long)
+        fun showStartWorkout(workoutID: Int)
 
         fun showSuccessfullySavedMessage()
 
@@ -36,11 +36,11 @@ interface WorkoutsContract {
 
         fun addNewWorkout()
 
-        fun editWorkout(workoutID: Long)
+        fun editWorkout(workoutID: Int)
 
-        fun removeWorkout(workoutID: Long)
+        fun removeWorkout(workoutID: Int)
 
-        fun startWorkout(workoutID: Long)
+        fun startWorkout(workoutID: Int)
 
     }
 }

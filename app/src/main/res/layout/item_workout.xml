@@ -49,7 +49,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="20:05" />
 
-            <Button
+            <com.primoz.timetimer.widgets.ButtonFontAwesome
                 android:id="@+id/btnEdit"
                 android:layout_width="88dp"
                 android:layout_height="0dp"

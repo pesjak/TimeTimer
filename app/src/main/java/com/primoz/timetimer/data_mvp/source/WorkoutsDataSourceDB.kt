@@ -26,7 +26,7 @@ class WorkoutsDataSourceDB : WorkoutsDataSource {
         }
     }
 
-    override fun getWorkout(workoutID: Long, callback: WorkoutsDataSource.GetWorkoutCallback) {
+    override fun getWorkout(workoutID: Int, callback: WorkoutsDataSource.GetWorkoutCallback) {
         val realm = Realm.getDefaultInstance()
         val workout =  realm.where<Workout>().equalTo("workoutID", workoutID).findFirst()
         if (workout == null) {
@@ -42,13 +42,13 @@ class WorkoutsDataSourceDB : WorkoutsDataSource {
         callback.onWorkoutSaved()
     }
 
-    override fun editWorkout(workoutID: Long, workout: WorkoutPOJO, callback: WorkoutsDataSource.EditedWorkoutCallback) {
+    override fun editWorkout(workoutID: Int, workout: WorkoutPOJO, callback: WorkoutsDataSource.EditedWorkoutCallback) {
         val realm = Realm.getDefaultInstance()
         DataHelper.editWorkout(realm, workoutID, workout)
         callback.onWorkoutEdited()
     }
 
-    override fun deleteWorkout(workoutID: Long, callback: WorkoutsDataSource.DeletedWorkoutCallback) {
+    override fun deleteWorkout(workoutID: Int, callback: WorkoutsDataSource.DeletedWorkoutCallback) {
         val realm = Realm.getDefaultInstance()
         DataHelper.deleteItemAsync(realm, workoutID)
         callback.onWorkoutDeleted()

@@ -21,6 +21,7 @@
     <string name="string_save">Save</string>
     <string name="string_saved">Saved</string>
     <string name="string_error_please_enter_a_new_name">Please enter a new name if you want to save</string>
+    <string name="error_enter_title">Name of the workout is necessary</string>
     <string name="string_do_you_want_to_save">Do you want to save?</string>
     <string name="string_yes">Save</string>
     <string name="string_no">Abort</string>

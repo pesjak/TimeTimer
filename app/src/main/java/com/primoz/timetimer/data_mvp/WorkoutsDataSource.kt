@@ -36,12 +36,12 @@ interface WorkoutsDataSource {
 
     fun getWorkouts(callback: LoadWorkoutsCallback)
 
-    fun getWorkout(workoutID: Long, callback: GetWorkoutCallback)
+    fun getWorkout(workoutID: Int, callback: GetWorkoutCallback)
 
     fun saveWorkout(workout: WorkoutPOJO, callback: SavedWorkoutCallback)
 
-    fun editWorkout(workoutID: Long, workout: WorkoutPOJO, callback: EditedWorkoutCallback)
+    fun editWorkout(workoutID: Int, workout: WorkoutPOJO, callback: EditedWorkoutCallback)
 
-    fun deleteWorkout(workoutID: Long, callback: DeletedWorkoutCallback)
+    fun deleteWorkout(workoutID: Int, callback: DeletedWorkoutCallback)
 }
 

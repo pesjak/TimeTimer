@@ -79,10 +79,10 @@ class WorkoutsFragment : Fragment(), WorkoutsContract.View, ViewHolderWorkoutLis
         (activity as MainActivity2).loadNewPrepareFragment()
     }
 
-    override fun showWorkoutDetailUI(workoutID: Long) {
+    override fun showWorkoutDetailUI(workoutID: Int) {
     }
 
-    override fun showStartWorkout(workoutID: Long) {
+    override fun showStartWorkout(workoutID: Int) {
     }
 
     override fun showSuccessfullySavedMessage() {
