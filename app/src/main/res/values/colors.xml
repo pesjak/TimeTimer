@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#2196F3</color>
+    <color name="colorPrimaryDark">#1976D2</color>
+    <color name="colorText">#FFFFFF</color>
+    <color name="colorTextPrimary">#212121</color>
+    <color name="colorTextSecondary">#757575</color>
+    <color name="colorAccent">#434141</color>
+    <color name="colorButton">#FF9800</color>
+    <color name="colorEdit">#2196F3</color>
+
+    <color name="colorBackgroundTitleCard">#fdfdfd</color>
+    <color name="colorBackground">#e0e0e0</color>
+    <color name="colorBackgroundCardMain">#ebebeb</color>
+    <color name="colorBackgroundDark">#434141</color>
+
+    <!--REST-->
+    <color name="colorTimeRest">#FF9800</color>
+    <color name="colorTextRest">#ebebeb</color>
+    <color name="colorBackgroundRest">#434141</color>
+
+    <!--WORK-->
+    <color name="colorTimeWork">#2196F3</color>
+    <color name="colorTextWork">#212121</color>
+    <color name="colorBackgroundWork">#ebebeb</color>
+
+    <color name="colorTransparent">#00000000</color>
+    <color name="colorCompleted">#4caf50</color>
+    <color name="colorSave">#1976D2</color>
+    <color name="colorSaved">#a5d6a7</color>
+
+
+    <color name="colorTextTitleEdit">#212121</color>
+    <color name="colorTintTitleEdit">#757575</color>
+    <color name="hint">#9e9e9e</color>
+
+    <color name="colorTextMainFragment">#ebebeb</color>
+
+    <color name="white">#ffffff</color>
+
+
+</resources>

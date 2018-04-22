@@ -1,0 +1,82 @@
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground">
+
+    <LinearLayout
+        android:id="@+id/fragment_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:cursorVisible="false"
+            android:hint="@string/string_hint_name"
+            android:inputType="textCapSentences"
+            android:maxLength="16"
+            android:maxLines="1"
+            android:textAllCaps="true"
+            android:textColor="@color/colorTextTitleEdit"
+            android:textColorHint="@color/hint"
+            android:textSize="28sp" />
+
+        <com.primoz.timetimer.widgets.CreateProgramView
+            android:id="@+id/programView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:weightSum="5">
+
+            <Chronometer
+                android:id="@+id/cTotalTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="46sp" />
+
+            <com.primoz.timetimer.widgets.ButtonFontAwesome
+                android:id="@+id/btnStart"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:background="@color/colorButton"
+                android:gravity="center"
+                android:paddingBottom="20dp"
+                android:paddingTop="20dp"
+                android:text="@string/fa_play"
+                android:textColor="@color/colorText"
+                android:textSize="42sp" />
+
+        </LinearLayout>
+
+        <com.primoz.timetimer.widgets.ButtonFontAwesome
+            android:id="@+id/btnSave"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="8dp"
+            android:background="@color/colorSave"
+            android:gravity="center"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:text="@string/fa_save"
+            android:textColor="@color/colorText"
+            android:textSize="28sp" />
+
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>
