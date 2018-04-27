@@ -31,7 +31,7 @@ class WorkoutsPresenter(private var mWorkoutsRepository: WorkoutsRepository, var
             }
 
             override fun onDataNotAvailable(workouts: RealmList<Workout>) {
-                mWorkoutsView.showNoWorkouts(workouts)
+                mWorkoutsView.showNoWorkouts()
             }
         })
     }
@@ -49,7 +49,7 @@ class WorkoutsPresenter(private var mWorkoutsRepository: WorkoutsRepository, var
     }
 
     override fun removeWorkout(workoutID: Int) {
-        mWorkoutsRepository.deleteWorkout(workoutID, object : WorkoutsDataSource.DeletedWorkoutCallback {
+        mWorkoutsRepository.deleteWorkout(workoutID, object : WorkoutsDataSource.DeleteWorkoutCallback {
             override fun onWorkoutDeleted() {
                 mWorkoutsView.showSuccessfullyDeletedMessage()
             }

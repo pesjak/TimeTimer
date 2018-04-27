@@ -23,4 +23,5 @@ class MyWorkoutsAdapter(data: OrderedRealmCollection<Workout>, private val viewH
     override fun onBindViewHolder(holder: ViewHolderWorkout, position: Int) {
         getItem(position)?.let { holder.setData(it) }
     }
+
 }

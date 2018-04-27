@@ -1,6 +1,7 @@
 package com.primoz.timetimer.main.workouts
 
 
+import android.opengl.Visibility
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
@@ -18,6 +19,7 @@ import com.primoz.timetimer.data_mvp.WorkoutsRepository
 import com.primoz.timetimer.data_mvp.source.WorkoutsDataSourceDB
 import com.primoz.timetimer.interfaces.ViewHolderWorkoutListener
 import com.primoz.timetimer.managers.MyLinearLayoutManager
+import com.primoz.timetimer.viewholders.ViewHolderWorkout
 import io.realm.RealmList
 import kotlinx.android.synthetic.main.fragment_workouts.*
 
@@ -34,7 +36,6 @@ class WorkoutsFragment : Fragment(), WorkoutsContract.View, ViewHolderWorkoutLis
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mPresenter = WorkoutsPresenter(WorkoutsRepository.getInstance(WorkoutsDataSourceDB.getInstance()), this)
-
 
         rvWorkouts.setHasFixedSize(true)
         rvWorkouts.layoutManager = MyLinearLayoutManager(context)
@@ -57,9 +58,10 @@ class WorkoutsFragment : Fragment(), WorkoutsContract.View, ViewHolderWorkoutLis
         }
         rvWorkouts.adapter = adapter
         if (workouts.isEmpty()) {
-            showNoWorkouts(workouts)
+            showNoWorkouts()
         } else {
             errorLayout.visibility = View.GONE
+            rvWorkouts.visibility = View.VISIBLE
         }
     }
 
@@ -72,7 +74,9 @@ class WorkoutsFragment : Fragment(), WorkoutsContract.View, ViewHolderWorkoutLis
     }
 
 
-    override fun showNoWorkouts(workouts: RealmList<Workout>) {
+    override fun showNoWorkouts() {
+        errorLayout.visibility = View.VISIBLE
+        rvWorkouts.visibility = View.GONE
     }
 
     override fun showAddWorkout() {
@@ -80,9 +84,11 @@ class WorkoutsFragment : Fragment(), WorkoutsContract.View, ViewHolderWorkoutLis
     }
 
     override fun showWorkoutDetailUI(workoutID: Int) {
+        (activity as MainActivity2).loadEditPrepareFragment(workoutID)
     }
 
     override fun showStartWorkout(workoutID: Int) {
+        (activity as MainActivity2).showPlayFragment(workoutID)
     }
 
     override fun showSuccessfullySavedMessage() {
@@ -100,16 +106,17 @@ class WorkoutsFragment : Fragment(), WorkoutsContract.View, ViewHolderWorkoutLis
     private inner class TouchHelperCallback internal constructor() : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or ItemTouchHelper.DOWN, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
 
         override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
-            return true
+            return false
         }
 
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-            // val workoutViewHolder = viewHolder as ViewHolderWorkout
-            //  mPresenter.removeWorkout(workoutViewHolder.item.getWorkoutID())
+            val workoutViewHolder = viewHolder as ViewHolderWorkout
+            mPresenter.removeWorkout(workoutViewHolder.item.workoutID)
+            mPresenter.start()
         }
 
         override fun isLongPressDragEnabled(): Boolean {
-            return true
+            return false
         }
     }
 }

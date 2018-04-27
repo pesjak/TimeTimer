@@ -1,7 +1,5 @@
 package com.primoz.timetimer.data_mvp.source
 
-import android.content.Context
-
 import com.primoz.timetimer.data_mvp.Workout
 import com.primoz.timetimer.data_mvp.WorkoutList
 import com.primoz.timetimer.data_mvp.WorkoutPOJO
@@ -36,19 +34,19 @@ class WorkoutsDataSourceDB : WorkoutsDataSource {
         }
     }
 
-    override fun saveWorkout(workout: WorkoutPOJO, callback: WorkoutsDataSource.SavedWorkoutCallback) {
+    override fun saveWorkout(workout: WorkoutPOJO, callback: WorkoutsDataSource.SaveWorkoutCallback) {
         val realm = Realm.getDefaultInstance()
         DataHelper.addNewWorkout(realm, workout)
         callback.onWorkoutSaved()
     }
 
-    override fun editWorkout(workoutID: Int, workout: WorkoutPOJO, callback: WorkoutsDataSource.EditedWorkoutCallback) {
+    override fun editWorkout(workoutID: Int, workout: WorkoutPOJO, callback: WorkoutsDataSource.EditWorkoutCallback) {
         val realm = Realm.getDefaultInstance()
         DataHelper.editWorkout(realm, workoutID, workout)
         callback.onWorkoutEdited()
     }
 
-    override fun deleteWorkout(workoutID: Int, callback: WorkoutsDataSource.DeletedWorkoutCallback) {
+    override fun deleteWorkout(workoutID: Int, callback: WorkoutsDataSource.DeleteWorkoutCallback) {
         val realm = Realm.getDefaultInstance()
         DataHelper.deleteItemAsync(realm, workoutID)
         callback.onWorkoutDeleted()

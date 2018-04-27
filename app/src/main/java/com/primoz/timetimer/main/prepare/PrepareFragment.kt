@@ -34,6 +34,18 @@ class PrepareFragment : Fragment(), PrepareContract.View, TotalTimeListener {
         }
     }
 
+    override fun showAlreadyExists() {
+        Toast.makeText(context, getString(R.string.error_already_exists), Toast.LENGTH_SHORT).show()
+    }
+
+    override fun showSuccesfullyAddedNewWorkout() {
+        Toast.makeText(context, getString(R.string.success_add), Toast.LENGTH_SHORT).show()
+    }
+
+    override fun showSuccesfullyEditedWorkout() {
+        Toast.makeText(context, getString(R.string.success_edit), Toast.LENGTH_SHORT).show()
+    }
+
     override fun showWork(work: Int) {
         programView.setWork(work)
     }
@@ -77,6 +89,12 @@ class PrepareFragment : Fragment(), PrepareContract.View, TotalTimeListener {
         (activity as MainActivity2).showPlayFragment(idOfProgram)
     }
 
+
+    private fun showPlayFragment(title: String, workSeconds: Int, restSeconds: Int, rounds: Int) {
+        (activity as MainActivity2).showPlayFragment(title, workSeconds, restSeconds, rounds)
+    }
+
+
     override fun showEnterTitle() {
         Toast.makeText(context, getString(R.string.error_enter_title), Toast.LENGTH_SHORT).show()
     }
@@ -96,7 +114,7 @@ class PrepareFragment : Fragment(), PrepareContract.View, TotalTimeListener {
         etName.typeface = FontManager.getTypeface(context, FontManager.ALEGREYA_TTF)
 
         showWork(5) //Set Default Work to 5s
-        updateTotalTime(0,0,5)
+        updateTotalTime(0, 0, 5)
 
         //Load Program if Necessary
         if (arguments != null) {
@@ -108,7 +126,17 @@ class PrepareFragment : Fragment(), PrepareContract.View, TotalTimeListener {
 
         //On Click Listeners
         btnSave.setOnClickListener { mPresenter.saveProgram(etName.text.toString(), programView.getWorkSeconds(), programView.getRestSeconds(), programView.getRounds()) }
-        btnStart.setOnClickListener { mPresenter.playProgram(idOfProgram) }
+        btnStart.setOnClickListener {
+            if (etName.text.isEmpty()) {
+                showEnterTitle()
+                return@setOnClickListener
+            }
+
+            mPresenter.saveProgram(etName.text.toString(), programView.getWorkSeconds(), programView.getRestSeconds(), programView.getRounds())
+
+            showPlayFragment(etName.text.toString(), programView.getWorkSeconds(), programView.getRestSeconds(), programView.getRounds())
+
+        }
         programView.setUpdateListener(this)
     }
 }

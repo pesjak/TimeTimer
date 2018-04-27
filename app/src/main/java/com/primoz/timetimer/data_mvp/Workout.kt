@@ -10,7 +10,7 @@ open class Workout : RealmObject() {
 
     @PrimaryKey
     var workoutID: Int = 0
-    var name: String? = null
+    var name: String = ""
     var timeWork: Int = 0
     var timeRest: Int = 0
     var timeRounds: Int = 0
@@ -42,6 +42,12 @@ open class Workout : RealmObject() {
             workout.timeRest = timeRest
             workout.timeRounds = timeRounds
             workouts!!.add(workout)
+        }
+
+        fun exists(realm: Realm, workoutName: String): Boolean {
+            val workout = realm.where<Workout>().equalTo("name", workoutName).findFirst()
+            if(workout != null) return true
+            return false
         }
     }
 }

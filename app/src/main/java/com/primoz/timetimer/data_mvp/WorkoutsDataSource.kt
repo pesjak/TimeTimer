@@ -22,15 +22,15 @@ interface WorkoutsDataSource {
     }
 
 
-    interface SavedWorkoutCallback {
+    interface SaveWorkoutCallback {
         fun onWorkoutSaved()
     }
 
-    interface EditedWorkoutCallback {
+    interface EditWorkoutCallback {
         fun onWorkoutEdited()
     }
 
-    interface DeletedWorkoutCallback {
+    interface DeleteWorkoutCallback {
         fun onWorkoutDeleted()
     }
 
@@ -38,10 +38,10 @@ interface WorkoutsDataSource {
 
     fun getWorkout(workoutID: Int, callback: GetWorkoutCallback)
 
-    fun saveWorkout(workout: WorkoutPOJO, callback: SavedWorkoutCallback)
+    fun saveWorkout(workout: WorkoutPOJO, callback: SaveWorkoutCallback)
 
-    fun editWorkout(workoutID: Int, workout: WorkoutPOJO, callback: EditedWorkoutCallback)
+    fun editWorkout(workoutID: Int, workout: WorkoutPOJO, callback: EditWorkoutCallback)
 
-    fun deleteWorkout(workoutID: Int, callback: DeletedWorkoutCallback)
+    fun deleteWorkout(workoutID: Int, callback: DeleteWorkoutCallback)
 }
 

@@ -33,7 +33,7 @@
                     android:layout_weight="2"
                     android:text="-" />
 
-                <Chronometer
+                <com.primoz.timetimer.widgets.ChronometerFont
                     android:id="@+id/cTimeWork"
                     style="@style/MyChronoMeter"
                     android:layout_width="0dp"
@@ -83,7 +83,7 @@
                     android:layout_weight="2"
                     android:text="-" />
 
-                <Chronometer
+                <com.primoz.timetimer.widgets.ChronometerFont
                     android:id="@+id/cTimeRest"
                     style="@style/MyChronoMeter"
                     android:layout_width="0dp"
@@ -133,7 +133,7 @@
                     android:layout_weight="2"
                     android:text="-" />
 
-                <TextView
+                <com.primoz.timetimer.widgets.FontTextView
                     android:id="@+id/tvRounds"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

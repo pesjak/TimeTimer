@@ -2,6 +2,7 @@ package com.primoz.timetimer.data_mvp.source
 
 import com.primoz.timetimer.data_mvp.Workout
 import com.primoz.timetimer.data_mvp.WorkoutPOJO
+import com.primoz.timetimer.data_mvp.WorkoutsDataSource
 
 import io.realm.Realm
 import io.realm.kotlin.where
@@ -12,7 +13,7 @@ import io.realm.kotlin.where
 
 object DataHelper {
 
-    fun addNewWorkout(realm: Realm, workoutPOJO: WorkoutPOJO) {
+    fun addNewWorkout(realm: Realm, workoutPOJO: WorkoutPOJO, listener: WorkoutsDataSource.SaveWorkoutCallback? = null) {
         realm.executeTransaction { realmInstance ->
             val name = workoutPOJO.name
             val timeWork = workoutPOJO.timeWork
@@ -20,23 +21,20 @@ object DataHelper {
             val timeRounds = workoutPOJO.timeRounds
 
             Workout.createWorkout(realmInstance, name, timeWork, timeRest, timeRounds)
+            listener?.onWorkoutSaved()
         }
     }
 
 
-    fun editWorkout(realm: Realm, workoutID: Int, workoutPOJO: WorkoutPOJO) {
+    fun editWorkout(realm: Realm, workoutID: Int, workoutPOJO: WorkoutPOJO, listener: WorkoutsDataSource.EditWorkoutCallback? = null) {
         realm.executeTransaction { realmInstance ->
-            val workout = realmInstance.where<Workout>().equalTo("workoutID", workoutID).findFirst()
-
-            val name = workoutPOJO.name
-            val timeWork = workoutPOJO.timeWork
-            val timeRest = workoutPOJO.timeRest
-            val timeRounds = workoutPOJO.timeRounds
-
-            workout!!.name = name
-            workout.timeWork = timeWork
-            workout.timeRest = timeRest
-            workout.timeRounds = timeRounds
+            realmInstance.where<Workout>().equalTo("workoutID", workoutID).findFirst()?.let {
+                it.name = workoutPOJO.name
+                it.timeWork = workoutPOJO.timeWork
+                it.timeRest = workoutPOJO.timeRest
+                it.timeRounds = workoutPOJO.timeRounds
+                listener?.onWorkoutEdited()
+            }
         }
     }
 

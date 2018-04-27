@@ -25,15 +25,15 @@ class WorkoutsRepository(private val mWorkoutsDataSource: WorkoutsDataSource) : 
         mWorkoutsDataSource.getWorkout(workoutID, callback)
     }
 
-    override fun saveWorkout(workout: WorkoutPOJO, callback: WorkoutsDataSource.SavedWorkoutCallback) {
+    override fun saveWorkout(workout: WorkoutPOJO, callback: WorkoutsDataSource.SaveWorkoutCallback) {
         mWorkoutsDataSource.saveWorkout(workout, callback)
     }
 
-    override fun editWorkout(workoutID: Int, workout: WorkoutPOJO, callback: WorkoutsDataSource.EditedWorkoutCallback) {
+    override fun editWorkout(workoutID: Int, workout: WorkoutPOJO, callback: WorkoutsDataSource.EditWorkoutCallback) {
         mWorkoutsDataSource.editWorkout(workoutID, workout, callback)
     }
 
-    override fun deleteWorkout(workoutID: Int, callback: WorkoutsDataSource.DeletedWorkoutCallback) {
+    override fun deleteWorkout(workoutID: Int, callback: WorkoutsDataSource.DeleteWorkoutCallback) {
         mWorkoutsDataSource.deleteWorkout(workoutID, callback)
     }
 

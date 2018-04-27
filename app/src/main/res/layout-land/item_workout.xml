@@ -17,7 +17,7 @@
         android:background="@color/colorBackground"
         android:orientation="vertical">
 
-        <TextView
+        <com.primoz.timetimer.widgets.FontTextView
             android:id="@+id/tvName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,9 +30,9 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorBackgroundCardMain">
+            android:background="@color/white">
 
-            <TextView
+            <com.primoz.timetimer.widgets.FontTextView
                 android:id="@+id/tvTotalTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
                 android:id="@+id/btnEdit"
                 android:layout_width="88dp"
                 android:layout_height="0dp"
-                android:background="@color/colorBackground"
+                android:background="@color/white"
                 android:gravity="center"
                 android:text="@string/fa_edit"
                 android:foreground="?attr/selectableItemBackground"
@@ -64,7 +64,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0" />
 
-            <TextView
+            <com.primoz.timetimer.widgets.FontTextView
                 android:id="@+id/tvWorkTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView4"
                 tools:text="1:00" />
 
-            <TextView
+            <com.primoz.timetimer.widgets.FontTextView
                 android:id="@+id/tvRestTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -95,7 +95,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView5"
                 tools:text="1:00" />
 
-            <TextView
+            <com.primoz.timetimer.widgets.FontTextView
                 android:id="@+id/tvRounds"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -109,7 +109,7 @@
                 app:layout_constraintRight_toRightOf="@+id/tvTotalTime"
                 tools:text="15x" />
 
-            <TextView
+            <com.primoz.timetimer.widgets.FontTextView
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -125,7 +125,7 @@
                 app:layout_constraintRight_toLeftOf="@+id/tvTotalTime"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <com.primoz.timetimer.widgets.FontTextView
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

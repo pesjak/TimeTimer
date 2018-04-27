@@ -15,7 +15,7 @@ interface WorkoutsContract {
     interface View : BaseView<Presenter> {
         fun showWorkouts(workouts: RealmList<Workout>)
 
-        fun showNoWorkouts(workouts: RealmList<Workout>)
+        fun showNoWorkouts()
 
         fun showAddWorkout()
 

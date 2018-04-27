@@ -22,6 +22,7 @@ import com.primoz.timetimer.R;
 import com.primoz.timetimer.activities.MainActivity;
 import com.primoz.timetimer.extras.FontManager;
 import com.primoz.timetimer.extras.MyCountDownTimer;
+import com.primoz.timetimer.main.MainActivity2;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -75,6 +76,18 @@ public class FragmentWork extends Fragment {
         return fragment;
     }
 
+    public static FragmentWork newInstance(int timeWork, int timeRest, int rounds) {
+        FragmentWork fragment = new FragmentWork();
+        Bundle args = new Bundle();
+        args.putInt(ARG_TIME_WORK, timeWork);
+        args.putInt(ARG_TIME_REST, timeRest);
+        args.putInt(ARG_ROUNDS, rounds);
+        args.putInt(ARG_SECONDS_TO_FINISH, (timeWork + timeRest) * rounds);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,8 +97,6 @@ public class FragmentWork extends Fragment {
             totalRounds = getArguments().getInt(ARG_ROUNDS);
             secondsToFinish = getArguments().getInt(ARG_SECONDS_TO_FINISH);
         }
-
-
     }
 
     @Override
@@ -207,8 +218,8 @@ public class FragmentWork extends Fragment {
         btnPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* MainActivity mainActivity = (MainActivity) getActivity();
-                mainActivity.loadMainFragment();*/
+                MainActivity2 mainActivity = (MainActivity2) getActivity();
+                mainActivity.loadWorkoutListFragment();
             }
         });
     }
@@ -340,8 +351,8 @@ public class FragmentWork extends Fragment {
         Log.v("Destroyed", "FragmentWork");
         myCountDownTimer.DestroyTimer();
 
-        int colorToBackground = (ContextCompat.getColor(getContext(), R.color.colorBackgroundWork));
-        ((MainActivity) getActivity()).animateFromToBackground(colorToBackground, colorToBackground); //Background
+     //   int colorToBackground = (ContextCompat.getColor(getContext(), R.color.colorBackgroundWork));
+     //   ((MainActivity2) getActivity()).animateFromToBackground(colorToBackground, colorToBackground); //Background
         super.onDestroy();
     }
 
