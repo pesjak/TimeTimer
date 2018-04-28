@@ -8,26 +8,27 @@ import android.media.AudioManager
 import android.media.SoundPool
 import android.os.Build
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.WindowManager
 import com.primoz.timetimer.R
 import com.primoz.timetimer.data_mvp.Workout
 import com.primoz.timetimer.data_mvp.WorkoutsDataSource
-import com.primoz.timetimer.data_mvp.source.DataHelper
 import com.primoz.timetimer.data_mvp.source.WorkoutsDataSourceDB
-import com.primoz.timetimer.fragments.FragmentWork
 import com.primoz.timetimer.helpers.addFragment
 import com.primoz.timetimer.helpers.replaceFragment
 import com.primoz.timetimer.main.prepare.PrepareFragment
+import com.primoz.timetimer.main.work.FragmentWork
 import com.primoz.timetimer.main.workouts.WorkoutsFragment
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 /**
  * Created by Primož on 21/04/2018.
  */
 
-class MainActivity2 : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
     // Maximumn sound stream.
     private val MAX_STREAMS = 2
     // Stream type.
@@ -39,6 +40,7 @@ class MainActivity2 : AppCompatActivity() {
     var soundIDFinishedRound: Int = 0
     private var volume: Float = 0f
 
+    var currentFragment: Fragment? = null
 
     companion object {
         val KEY_ID_PROGRAM = "ProgramID"
@@ -48,15 +50,32 @@ class MainActivity2 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-        replaceFragment(WorkoutsFragment(), R.id.fragment_container)
+        initAudio()
+
+        currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
+        if (currentFragment == null) {
+            currentFragment = WorkoutsFragment()
+            replaceFragment(currentFragment as WorkoutsFragment, R.id.fragment_container)
+        }
+    }
+
+    override fun onBackPressed() {
+        if (currentFragment is PrepareFragment) {
+            if ((currentFragment as PrepareFragment).allowBackPressed()) {
+                super.onBackPressed()
+            }
+        } else super.onBackPressed()
+
     }
 
     fun loadWorkoutListFragment() {
-        replaceFragment(WorkoutsFragment(), R.id.fragment_container)
+        currentFragment = WorkoutsFragment()
+        replaceFragment(currentFragment as WorkoutsFragment, R.id.fragment_container)
     }
 
     fun loadNewPrepareFragment() {
-        addFragment(PrepareFragment(), R.id.fragment_container)
+        currentFragment = PrepareFragment()
+        addFragment(currentFragment as PrepareFragment, R.id.fragment_container)
     }
 
     fun loadEditPrepareFragment(idOfProgram: Int) {
@@ -64,14 +83,16 @@ class MainActivity2 : AppCompatActivity() {
         bundle.putInt(KEY_ID_PROGRAM, idOfProgram)
         val prepareFragment = PrepareFragment()
         prepareFragment.arguments = bundle
-        addFragment(prepareFragment, R.id.fragment_container)
+        currentFragment = prepareFragment
+        addFragment(currentFragment as PrepareFragment, R.id.fragment_container)
     }
 
     fun showPlayFragment(idOfProgram: Int) {
         WorkoutsDataSourceDB.getInstance().getWorkout(idOfProgram, object : WorkoutsDataSource.GetWorkoutCallback {
             override fun onWorkoutLoaded(workout: Workout) {
                 val prepareFragment = FragmentWork.newInstance(workout.timeWork, workout.timeRest, workout.timeRounds)
-                addFragment(prepareFragment, R.id.fragment_container)
+                currentFragment = prepareFragment
+                addFragment(currentFragment as FragmentWork, R.id.fragment_container)
             }
 
             override fun onDataNotAvailable() {
@@ -81,7 +102,8 @@ class MainActivity2 : AppCompatActivity() {
 
     fun showPlayFragment(title: String, workSeconds: Int, restSeconds: Int, rounds: Int) {
         val prepareFragment = FragmentWork.newInstance(workSeconds, restSeconds, rounds)
-        addFragment(prepareFragment, R.id.fragment_container)
+        currentFragment = prepareFragment
+        addFragment(currentFragment as FragmentWork, R.id.fragment_container)
     }
 
 
@@ -143,5 +165,16 @@ class MainActivity2 : AppCompatActivity() {
                 soundPool.play(soundIDone, volume, volume, 1, 0, 1f)
             }
         }
+    }
+
+    fun changeToRest() {
+        rlBackground.setBackgroundColor(ContextCompat.getColor(baseContext, R.color.colorBackgroundRest))
+    }
+
+    fun animateFromToBackground(colorFrom: Int, colorTo: Int) {
+        val colorAnimation = ValueAnimator.ofObject(ArgbEvaluator(), colorFrom, colorTo)
+        colorAnimation.duration = 300 // milliseconds
+        colorAnimation.addUpdateListener { animator -> rlBackground.setBackgroundColor(animator.animatedValue as Int) }
+        colorAnimation.start()
     }
 }

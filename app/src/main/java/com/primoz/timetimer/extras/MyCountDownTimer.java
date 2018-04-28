@@ -4,8 +4,7 @@ import android.app.Activity;
 import android.os.Handler;
 import android.util.Log;
 
-import com.primoz.timetimer.activities.MainActivity;
-import com.primoz.timetimer.main.MainActivity2;
+import com.primoz.timetimer.main.MainActivity;
 
 /**
  * Created by primo on 18. 10. 2016.
@@ -70,7 +69,7 @@ public class MyCountDownTimer {
                         mHandler.postDelayed(this, countDownInterval);
 
                         if (sec >= 0 && sec <= 5) {
-                            MainActivity2 mainActivity = (MainActivity2) activity;
+                            MainActivity mainActivity = (MainActivity) activity;
                             mainActivity.playEndRoundSound(sec, rest);
                         }
 

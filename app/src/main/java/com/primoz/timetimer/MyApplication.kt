@@ -13,9 +13,9 @@ class MyApplication : Application() {
         Realm.init(this)
         val realmConfig = RealmConfiguration.Builder()
                 .initialData { realm -> realm.createObject<WorkoutList>() }
+                .deleteRealmIfMigrationNeeded()
                 .build()
 
-        Realm.deleteRealm(realmConfig) // Delete Realm between app restarts.
         Realm.setDefaultConfiguration(realmConfig)
     }
 }

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Time Timer</string>
+    <string name="title_activity_main">Glavna aktivnost</string>
+    <string name="action_settings">Nastavitve</string>
+    <string name="title_warm_up">Ogrevanje</string>
+    <string name="title_train">Trening</string>
+    <string name="stringStatusREST">POČIVAJ</string>
+    <string name="stringStatusWORK">WORK IT</string>
+    <string name="stringStatusPauseReally">…NIMAM KOMENTARJA</string>
+    <string name="stringStatusPause">POČIVAJ</string>
+    <string name="stringDone">KONEC!</string>
+    <string name="string_hint_name">Vnesi ime tukaj</string>
+    <string name="nothing_added">Nič še ni dodano 😥</string>
+    <string name="string_save">Shrani</string>
+    <string name="string_saved">Shranjeno</string>
+    <string name="string_error_please_enter_a_new_name">Prosim vnesite ime, če hočete shraniti.</string>
+    <string name="string_do_you_want_to_save">Hočeš shranit?</string>
+    <string name="string_yes">Shrani</string>
+    <string name="string_no">Naah</string>
+    <string name="string_rest">Počivaj</string>
+    <string name="string_work">Work</string>
+    <string name="error_already_exists">Že obstaja s tem imenom</string>
+    <string name="error_enter_title">Ime je obvezno 😐</string>
+    <string name="success_add">Uspešno shranjeno</string>
+    <string name="success_edit">Uspešno urejeno</string>
+    <string name="great_job">Great job 😁, have fun 😉</string>
+</resources>

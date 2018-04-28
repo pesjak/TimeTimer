@@ -9,5 +9,6 @@ import com.primoz.timetimer.data_mvp.Workout;
 
 public interface ViewHolderWorkoutListener {
     void onEditClicked(Workout item);
+
     void onItemClicked(Workout item);
 }

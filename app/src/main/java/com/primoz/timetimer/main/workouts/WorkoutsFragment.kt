@@ -1,7 +1,6 @@
 package com.primoz.timetimer.main.workouts
 
 
-import android.opengl.Visibility
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
@@ -10,14 +9,13 @@ import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.primoz.timetimer.R
-import com.primoz.timetimer.main.MainActivity2
 import com.primoz.timetimer.adapters.MyWorkoutsAdapter
 import com.primoz.timetimer.data_mvp.Workout
 import com.primoz.timetimer.data_mvp.WorkoutsRepository
 import com.primoz.timetimer.data_mvp.source.WorkoutsDataSourceDB
 import com.primoz.timetimer.interfaces.ViewHolderWorkoutListener
+import com.primoz.timetimer.main.MainActivity
 import com.primoz.timetimer.managers.MyLinearLayoutManager
 import com.primoz.timetimer.viewholders.ViewHolderWorkout
 import io.realm.RealmList
@@ -35,6 +33,8 @@ class WorkoutsFragment : Fragment(), WorkoutsContract.View, ViewHolderWorkoutLis
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        retainInstance = true
+
         mPresenter = WorkoutsPresenter(WorkoutsRepository.getInstance(WorkoutsDataSourceDB.getInstance()), this)
 
         rvWorkouts.setHasFixedSize(true)
@@ -42,6 +42,14 @@ class WorkoutsFragment : Fragment(), WorkoutsContract.View, ViewHolderWorkoutLis
         val touchHelperCallback = TouchHelperCallback()
         val touchHelper = ItemTouchHelper(touchHelperCallback)
         touchHelper.attachToRecyclerView(rvWorkouts)
+        rvWorkouts.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                if (dy > 0)
+                    fabAddWorkout.hide()
+                else if (dy < 0)
+                    fabAddWorkout.show()
+            }
+        })
 
         fabAddWorkout.setOnClickListener { mPresenter.addNewWorkout() }
         errorLayout.setOnClickListener { mPresenter.addNewWorkout() }
@@ -62,6 +70,7 @@ class WorkoutsFragment : Fragment(), WorkoutsContract.View, ViewHolderWorkoutLis
         } else {
             errorLayout.visibility = View.GONE
             rvWorkouts.visibility = View.VISIBLE
+            tvUseful.visibility = View.VISIBLE
         }
     }
 
@@ -77,18 +86,19 @@ class WorkoutsFragment : Fragment(), WorkoutsContract.View, ViewHolderWorkoutLis
     override fun showNoWorkouts() {
         errorLayout.visibility = View.VISIBLE
         rvWorkouts.visibility = View.GONE
+        tvUseful.visibility = View.GONE
     }
 
     override fun showAddWorkout() {
-        (activity as MainActivity2).loadNewPrepareFragment()
+        (activity as MainActivity).loadNewPrepareFragment()
     }
 
     override fun showWorkoutDetailUI(workoutID: Int) {
-        (activity as MainActivity2).loadEditPrepareFragment(workoutID)
+        (activity as MainActivity).loadEditPrepareFragment(workoutID)
     }
 
     override fun showStartWorkout(workoutID: Int) {
-        (activity as MainActivity2).showPlayFragment(workoutID)
+        (activity as MainActivity).showPlayFragment(workoutID)
     }
 
     override fun showSuccessfullySavedMessage() {
@@ -119,4 +129,5 @@ class WorkoutsFragment : Fragment(), WorkoutsContract.View, ViewHolderWorkoutLis
             return false
         }
     }
+
 }

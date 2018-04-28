@@ -25,10 +25,11 @@
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_margin="16dp"
             android:gravity="center"
             android:orientation="vertical"
+            android:padding="16dp"
             android:weightSum="5"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -76,10 +77,11 @@
                 android:textSize="42sp" />
 
             <com.primoz.timetimer.widgets.ButtonFontAwesome
-            android:id="@+id/btnSave"
-                android:layout_width="match_parent"
+                android:id="@+id/btnSave"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
+                android:layout_marginEnd="26dp"
                 android:layout_marginTop="8dp"
                 android:background="@color/colorSave"
                 android:gravity="center"

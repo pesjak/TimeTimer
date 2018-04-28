@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorBackgroundWork"
     android:fitsSystemWindows="true"
-    tools:context="com.primoz.timetimer.main.MainActivity2">
+    tools:context="com.primoz.timetimer.main.MainActivity">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"

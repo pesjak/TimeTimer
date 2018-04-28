@@ -46,7 +46,7 @@ open class Workout : RealmObject() {
 
         fun exists(realm: Realm, workoutName: String): Boolean {
             val workout = realm.where<Workout>().equalTo("name", workoutName).findFirst()
-            if(workout != null) return true
+            if (workout != null) return true
             return false
         }
     }

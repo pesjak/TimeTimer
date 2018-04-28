@@ -26,7 +26,7 @@ class WorkoutsDataSourceDB : WorkoutsDataSource {
 
     override fun getWorkout(workoutID: Int, callback: WorkoutsDataSource.GetWorkoutCallback) {
         val realm = Realm.getDefaultInstance()
-        val workout =  realm.where<Workout>().equalTo("workoutID", workoutID).findFirst()
+        val workout = realm.where<Workout>().equalTo("workoutID", workoutID).findFirst()
         if (workout == null) {
             callback.onDataNotAvailable()
         } else {

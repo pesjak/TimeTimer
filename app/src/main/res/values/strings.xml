@@ -6,31 +6,31 @@
     <string name="title_train">Train</string>
 
 
-    <string name="fa_play">&#xf04b;</string>
-    <string name="fa_pause">&#xf04c;</string>
-    <string name="fa_done">&#xf00c;</string>
-    <string name="fa_edit">&#xf044;</string>
-    <string name="fa_save">&#xf0c7;</string>
+    <string name="fa_play" translatable="false">&#xf04b;</string>
+    <string name="fa_pause" translatable="false">&#xf04c;</string>
+    <string name="fa_done" translatable="false">&#xf00c;</string>
+    <string name="fa_edit" translatable="false">&#xf044;</string>
+    <string name="fa_save" translatable="false">&#xf0c7;</string>
     <string name="stringStatusREST">REST</string>
     <string name="stringStatusWORK">WORK</string>
-    <string name="stringStatusPauseReally">PAUSED...Really??</string>
+    <string name="stringStatusPauseReally">"...Really PAUSED? hope you have a good reason "</string>
     <string name="stringStatusPause">PAUSE</string>
     <string name="stringDone">DONE!</string>
     <string name="string_hint_name">Enter the title here</string>
-    <string name="nothing_added">Nothing added yet :( \n add something ^^</string>
+    <string name="nothing_added">Nothing added yet 😥</string>
     <string name="string_save">Save</string>
     <string name="string_saved">Saved</string>
     <string name="string_error_please_enter_a_new_name">Please enter a new name if you want to save</string>
 
-    <string name="string_do_you_want_to_save">Do you want to save?</string>
+    <string name="string_do_you_want_to_save">Do you wish to save?</string>
     <string name="string_yes">Save</string>
-    <string name="string_no">Abort</string>
+    <string name="string_no">Naah</string>
     <string name="string_rest">Rest</string>
     <string name="string_work">Work</string>
 
     <string name="error_already_exists">Already exists, with that name.</string>
-    <string name="error_enter_title">Name of the workout is necessary</string>
+    <string name="error_enter_title">Name of the workout is necessary 😐</string>
     <string name="success_add">Successfully saved</string>
     <string name="success_edit">Successfully edited</string>
-
+    <string name="great_job">Great job 😁, have fun 😉</string>
 </resources>

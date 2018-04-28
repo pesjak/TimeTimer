@@ -1,6 +1,5 @@
 package com.primoz.timetimer.main.prepare
 
-import android.content.Context
 import com.primoz.timetimer.BasePresenter
 import com.primoz.timetimer.BaseView
 

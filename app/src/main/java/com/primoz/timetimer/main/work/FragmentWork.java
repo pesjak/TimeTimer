@@ -1,4 +1,4 @@
-package com.primoz.timetimer.fragments;
+package com.primoz.timetimer.main.work;
 
 
 import android.animation.ArgbEvaluator;
@@ -19,10 +19,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.primoz.timetimer.R;
-import com.primoz.timetimer.activities.MainActivity;
 import com.primoz.timetimer.extras.FontManager;
 import com.primoz.timetimer.extras.MyCountDownTimer;
-import com.primoz.timetimer.main.MainActivity2;
+import com.primoz.timetimer.main.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -218,7 +217,7 @@ public class FragmentWork extends Fragment {
         btnPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity2 mainActivity = (MainActivity2) getActivity();
+                MainActivity mainActivity = (MainActivity) getActivity();
                 mainActivity.loadWorkoutListFragment();
             }
         });
@@ -351,8 +350,8 @@ public class FragmentWork extends Fragment {
         Log.v("Destroyed", "FragmentWork");
         myCountDownTimer.DestroyTimer();
 
-     //   int colorToBackground = (ContextCompat.getColor(getContext(), R.color.colorBackgroundWork));
-     //   ((MainActivity2) getActivity()).animateFromToBackground(colorToBackground, colorToBackground); //Background
+        int colorToBackground = (ContextCompat.getColor(getContext(), R.color.colorBackgroundWork));
+        ((MainActivity) getActivity()).animateFromToBackground(colorToBackground, colorToBackground); //Background
         super.onDestroy();
     }
 

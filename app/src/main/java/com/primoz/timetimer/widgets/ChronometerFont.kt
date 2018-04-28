@@ -3,7 +3,6 @@ package com.primoz.timetimer.widgets
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.Chronometer
-import android.widget.TextView
 import com.primoz.timetimer.extras.FontManager
 
 /**

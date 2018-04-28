@@ -9,5 +9,5 @@ import android.support.v4.app.FragmentTransaction
  */
 
 inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> FragmentTransaction) {
-    beginTransaction().func().commit()
+    beginTransaction().setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out).func().commit()
 }

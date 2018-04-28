@@ -1,22 +1,10 @@
 package com.primoz.timetimer.viewholders
 
-import android.annotation.SuppressLint
-import android.graphics.Typeface
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import android.widget.Button
-import android.widget.TextView
-
-import com.primoz.timetimer.R
 import com.primoz.timetimer.data_mvp.Workout
-import com.primoz.timetimer.extras.FontManager
 import com.primoz.timetimer.extras.Util
 import com.primoz.timetimer.interfaces.ViewHolderWorkoutListener
-
-import butterknife.BindView
-import butterknife.ButterKnife
-import butterknife.OnClick
-import com.primoz.timetimer.R.id.tvName
 import kotlinx.android.synthetic.main.item_workout.view.*
 
 /**
@@ -40,7 +28,7 @@ class ViewHolderWorkout(itemView: View, private var listener: ViewHolderWorkoutL
         itemView.tvRestTime.text = getTime(item.timeRest)
         itemView.tvRounds.text = "${item.timeRounds}X"
 
-        itemView.btnEdit.setOnClickListener { listener.onEditClicked(item)}
+        itemView.btnEdit.setOnClickListener { listener.onEditClicked(item) }
         itemView.cvWorkoutItem.setOnClickListener { listener.onItemClicked(item) }
     }
 

@@ -3,6 +3,7 @@ package com.primoz.timetimer.main.prepare
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.v4.app.Fragment
 import android.text.InputFilter
 import android.view.LayoutInflater
@@ -11,26 +12,33 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import com.primoz.timetimer.R
-import com.primoz.timetimer.activities.MainActivity
 import com.primoz.timetimer.data_mvp.WorkoutsRepository
 import com.primoz.timetimer.data_mvp.source.WorkoutsDataSourceDB
 import com.primoz.timetimer.extras.FontManager
-import com.primoz.timetimer.main.MainActivity2
+import com.primoz.timetimer.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_prepare.*
 
 
 class PrepareFragment : Fragment(), PrepareContract.View, TotalTimeListener {
     lateinit var mPresenter: PrepareContract.Presenter
     private var idOfProgram: Int = 0
+    var NAME = "name"
+    var WORK = "train"
+    var REST = "rest"
+    var ROUNDS = "rounds"
+
+    private var dialogShown: Boolean = false
 
     var dialogClickListener: DialogInterface.OnClickListener = DialogInterface.OnClickListener { dialog, which ->
         when (which) {
             DialogInterface.BUTTON_POSITIVE -> {
                 mPresenter.saveProgram(etName.text.toString(), programView.getWorkSeconds(), programView.getRestSeconds(), programView.getRounds())
+                dialogShown = true
+            }
+            DialogInterface.BUTTON_NEGATIVE -> {
+                dialogShown = true
                 (activity as MainActivity).onBackPressed()
             }
-            DialogInterface.BUTTON_NEGATIVE ->
-                (activity as MainActivity).onBackPressed()
         }
     }
 
@@ -86,26 +94,24 @@ class PrepareFragment : Fragment(), PrepareContract.View, TotalTimeListener {
     }
 
     override fun showPlayFragment(idOfProgram: Int) {
-        (activity as MainActivity2).showPlayFragment(idOfProgram)
+        (activity as MainActivity).showPlayFragment(idOfProgram)
     }
-
 
     private fun showPlayFragment(title: String, workSeconds: Int, restSeconds: Int, rounds: Int) {
-        (activity as MainActivity2).showPlayFragment(title, workSeconds, restSeconds, rounds)
+        (activity as MainActivity).showPlayFragment(title, workSeconds, restSeconds, rounds)
     }
-
 
     override fun showEnterTitle() {
         Toast.makeText(context, getString(R.string.error_enter_title), Toast.LENGTH_SHORT).show()
     }
 
     override fun closePrepare() {
-        (activity as MainActivity2).loadWorkoutListFragment()
+        (activity as MainActivity).loadWorkoutListFragment()
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        retainInstance = true
 
         PreparePresenter(WorkoutsRepository.getInstance(WorkoutsDataSourceDB.getInstance()), this)
 
@@ -113,17 +119,28 @@ class PrepareFragment : Fragment(), PrepareContract.View, TotalTimeListener {
         etName.filters = arrayOf<InputFilter>(InputFilter.AllCaps())
         etName.typeface = FontManager.getTypeface(context, FontManager.ALEGREYA_TTF)
 
-        showWork(5) //Set Default Work to 5s
-        updateTotalTime(0, 0, 5)
 
-        //Load Program if Necessary
-        if (arguments != null) {
-            idOfProgram = arguments!!.getInt(MainActivity2.KEY_ID_PROGRAM)
-            mPresenter.loadProgram(idOfProgram)
-        } else { //Use Default
-            mPresenter.start()
+        if (savedInstanceState != null) {
+            val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
+            val name = sharedPref.getString(NAME, "Enter the title here")
+            val train = sharedPref.getInt(WORK, 5)
+            val rest = sharedPref.getInt(REST, 0)
+            val rounds = sharedPref.getInt(ROUNDS, 1)
+            showTitle(name)
+            showWork(train)
+            showRest(rest)
+            showRounds(rounds)
+            updateTotalTime(0, 0, 5)
+        } else {
+            //Load Program if Necessary
+            if (arguments != null) {
+                idOfProgram = arguments!!.getInt(MainActivity.KEY_ID_PROGRAM)
+                mPresenter.loadProgram(idOfProgram)
+            }else{
+                showWork(5)
+                updateTotalTime(0,0,5)
+            }
         }
-
         //On Click Listeners
         btnSave.setOnClickListener { mPresenter.saveProgram(etName.text.toString(), programView.getWorkSeconds(), programView.getRestSeconds(), programView.getRounds()) }
         btnStart.setOnClickListener {
@@ -139,4 +156,29 @@ class PrepareFragment : Fragment(), PrepareContract.View, TotalTimeListener {
         }
         programView.setUpdateListener(this)
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        //Save the fragment's state here
+        if (etName != null) saveTimes(etName.text.toString(), programView.getWorkSeconds(), programView.getRestSeconds(), programView.getRounds())
+    }
+
+    fun saveTimes(name: String, timeTrain: Int, timeRest: Int, rounds: Int) {
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
+        val editor = sharedPref.edit()
+        editor.putString(NAME, name)
+        editor.putInt(WORK, timeTrain)
+        editor.putInt(REST, timeRest)
+        editor.putInt(ROUNDS, rounds)
+        editor.apply()
+    }
+
+    fun allowBackPressed(): Boolean {
+        if (!dialogShown) {
+            showDialogAbort()
+        }
+        return dialogShown
+    }
+
+
 }
