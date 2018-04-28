@@ -13,7 +13,7 @@
     <string name="fa_save" translatable="false">&#xf0c7;</string>
     <string name="stringStatusREST">REST</string>
     <string name="stringStatusWORK">WORK</string>
-    <string name="stringStatusPauseReally">"...Really PAUSED? hope you have a good reason "</string>
+    <string name="stringStatusPauseReally">"…No Comment"</string>
     <string name="stringStatusPause">PAUSE</string>
     <string name="stringDone">DONE!</string>
     <string name="string_hint_name">Enter the title here</string>
